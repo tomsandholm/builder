@@ -25,6 +25,10 @@ stop:
 	echo "##### stopping container $(BUILD)"
 	docker stop $(BUILD)
 
+start:
+	echo "##### start container $(BUILD)"
+	docker start $(BUILD)
+
 ipget:
 	echo "##### query container $(BUILD) for it's IP address"
 	sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${BUILD}
