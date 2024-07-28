@@ -24,7 +24,7 @@ clean:
 ## map the user $HOME, and host-credentials to the container
 run:
 	echo "##### starting  container $(BUILD)"
-	docker run -d -p 2222:22 --name $(BUILD) \
+	docker run -d -p 2222:22 --name $(BUILD) --hostname $(BUILD) \
 		--volume /etc/sudoers:/etc/sudoers:ro \
 		--volume /etc/sudoers.d:/etc/sudoers.d:ro \
 		--volume /etc/passwd:/etc/passwd:ro \
