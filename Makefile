@@ -32,7 +32,7 @@ start:
 
 ipget:
 	echo "##### query container $(BUILD) for it's IP address"
-	sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${BUILD}
+	sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(BUILD)
 
 show:
 	docker ps
