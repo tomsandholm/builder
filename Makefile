@@ -18,8 +18,8 @@ run:
 	docker run -d -p 2222:22 --name $(BUILD) \
 		--volume /etc/passwd:/etc/passwd:ro \
 		--volume /etc/group:/etc/group:ro \
-		--volume /etc/shadow:/etc/shadow:ro $(BUILD) \
-		--volume /home/$(USERNAME):/home/$(USERNAME)
+		--volume /etc/shadow:/etc/shadow:ro  \
+		--volume /home/$(USERNAME):/home/$(USERNAME) $(BUILD)
 
 stop:
 	echo "##### stopping container $(BUILD)"
