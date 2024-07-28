@@ -9,8 +9,8 @@ build:
 
 clean:
 	echo "##### running clean on $(BUILD)"
-	docker stop $(BUILD)
-	docker rm $(BUILD)
+	docker stop $(BUILD)|| echo "not found"
+	docker rm $(BUILD)|| echo "not found"
 	docker system prune -f
 
 run:
