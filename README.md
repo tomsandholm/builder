@@ -3,8 +3,16 @@ Makefile and Dockerfile to build generic private build server for a developer
 
 This package will create a private docker image to be used by a developer to implement an isolated OS space sometimes required with legacy code.
 
-This image will import the developer space as well as system-credentials, facilitating fast and simple setup of the docker image, and
-significantly simplifying the procedure.
+This image will import the developer space as well as system-credentials, facilitating fast and simple setup of authentication.
+We pull in the following files as volume mounts:
+-  /etc/sudoers
+-  /etc/sudoers.d
+-  /etc/group
+-  /etc/passwd
+-  /etc/shadow
+-  /home/${USERNAME}
+
+This means user permissions in the Host OS will persist in the container space.  Or at least that's the hope.  ;-)
 
 These images and containers are multi-user capable.  
 
