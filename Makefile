@@ -37,3 +37,5 @@ ipget:
 show:
 	docker ps
 
+connect:
+	ssh -p 2222 -o StrictHostKeyChecking=no $(USERNAME)@localhost || echo "#### session done"
