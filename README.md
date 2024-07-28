@@ -31,3 +31,22 @@ They will clone their project code at the host layer, then spin up the docker-im
     It is a task to the user to exchange the proper keys and remove that ssh option from the Makefile
 
 
+# manage
+
+- Stop container:  make stop
+
+- Start container:  make start
+
+- Show running containers:  make show
+
+- Get ip-address of running container:  make ipget
+
+- Connect to a running container:  make connect
+
+- Destroy everything, massive cleanup:  make clean
+
+# Dockerfile
+
+  You will update this file as necessary for the particular software needed.
+
+
