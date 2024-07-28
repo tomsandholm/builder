@@ -1,23 +1,29 @@
+SHELL = /bin/bash
+
+USERNAME := $(shell id --user --name)
+BUILD := $(USERNAME)-build
+
 build:
-	docker build -t build:latest .
+	docker build -t $(BUILD) .
 
 clean:
+	docker stop $(BUILD)
+	docker rm $(BUILD)
 	docker system prune -f
-	docker image rm build
 
 run:
-	#docker run -d -p 2222:22 --name build build:latest
-	docker run -d -p 2222:22 --name build \
+	#docker run -d -p 2222:22 --name $(BUILD)
+	docker run -d -p 2222:22 --name $(BUILD) \
 		--volume /etc/passwd:/etc/passwd:ro \
 		--volume /etc/group:/etc/group:ro \
-		--volume /home/`id --name --user`:/home/`id --name --user`  \
-		--volume /etc/shadow:/etc/shadow:ro build:latest
+		--volume /home/${USERNAME}:/home/${USERNAME} \
+		--volume /etc/shadow:/etc/shadow:ro $(BUILD)
 
 stop:
-	docker stop build
+	docker stop $(BUILD)
 
 ipget:
-	sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' build
+	sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${BUILD}
 
 show:
 	docker ps
