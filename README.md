@@ -35,9 +35,9 @@ They will clone their project code at the host layer, then spin up the docker-im
 3.  make connect
 
     This will open an ssh session to the container named ${USERNAME}-build.
-    It has skip StrictHostKeyChecking as a simplification means to get into the container.
-    It is a task to the user to exchange the proper keys and remove that ssh option from the Makefile
-
+    The container has used --net=host networking; meaning the port is available on the Host OS.
+    The port for the container ssh is 2222.
+    Other systems can access the container ssh service via host ipaddress:2222.
 
 # manage
 
@@ -52,6 +52,8 @@ They will clone their project code at the host layer, then spin up the docker-im
 - Connect to a running container:  make connect
 
 - Destroy everything, massive cleanup:  make clean
+
+- Clean up known_hosts: make sshclean
 
 # Dockerfile
 
