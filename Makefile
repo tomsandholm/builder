@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := help
+
 SHELL = /bin/bash
 
 ## we will create the image as USERNAME-build
@@ -5,6 +7,15 @@ USERNAME := $(shell id --user --name)
 
 ## this is our image name
 BUILD := $(USERNAME)-build
+
+help:
+	@echo "builder  target"
+	@echo "targets are:"
+	@echo "build  create the container"
+	@echo "run    run the container"
+	@echo "stop   stop the container"
+	@echo "start  start the container"
+	@echo "clean  clean up delete all"
 
 ## task to build a new USERNAME-build:latest image
 build:
@@ -24,7 +35,9 @@ clean:
 ## map the user $HOME, and host-credentials to the container
 run:
 	echo "##### starting  container $(BUILD)"
-	docker run -d -p 2222:22 --name $(BUILD) --hostname $(BUILD) \
+#       docker run -d -p 2222:22 --name $(BUILD) --hostname $(BUILD) 
+	docker run -d --name $(BUILD) --hostname $(BUILD) \
+		--net=host \
 		--volume /etc/sudoers:/etc/sudoers:ro \
 		--volume /etc/sudoers.d:/etc/sudoers.d:ro \
 		--volume /etc/passwd:/etc/passwd:ro \
@@ -51,7 +64,13 @@ ipget:
 show:
 	docker ps
 
+## clean up old known_hosts entries
+sshclean:
+	ssh-keygen -f '/home/sandholm/.ssh/known_hosts' -R '[localhost]:2222'
+
+
 ## connect to our private running container, skip host-key conflicts for now
 connect:
-	ssh -p 2222 -o StrictHostKeyChecking=no $(USERNAME)@localhost || echo "#### session done"
+	#ssh -p 2222 -o StrictHostKeyChecking=no $(USERNAME)@localhost || echo "#### session done"
+	ssh -p 2222 $(USERNAME)@localhost || echo "#### session done"
 
