@@ -3,7 +3,8 @@
 SHELL = /bin/bash
 
 ## we will create the image as USERNAME-build
-USERNAME := $(shell id --user --name)
+#USERNAME := $(shell id --user --name)
+USERNAME := $(shell id -nru)
 
 ## this is our image name
 BUILD := $(USERNAME)-build
