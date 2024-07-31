@@ -1,6 +1,7 @@
 # builder
 Makefile and Dockerfile to build generic private build server for a developer
 
+
 This package will create a private docker image to be used by a developer to implement an isolated OS space sometimes required with legacy code.
 
 This image will import the developer space as well as system-credentials, facilitating fast and simple setup of authentication.
